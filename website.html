@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+
+<html>
+    <head>
+    
+</head>
+<body>
+<h1>Boost Amount</h1>
+<p id = "show">Boost amount</p>
+
+
+<div id="myProgress">
+  <div id="myBar">10%</div>
+</div>
+
+<style>
+    #myProgress {
+      width: 100%;
+      background-color: #ddd;
+    }
+    
+    #myBar {
+      width: 10%;
+      height: 30px;
+      background-color: #4CAF50;
+      text-align: center;
+      line-height: 30px;
+      color: white;
+    }
+    </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+var elem = document.getElementById("myBar");
+var width = 0;
+setInterval(function() {
+    fetch("http://10.147.18.246:8080/boost/Config.json")
+        .then(Response => Response.json())
+        .then(data => {
+            console.log(data)
+            document.getElementById("show").innerText = data.boost
+            //move(data.boost);
+            width = data.boost;
+            elem.style.width = width + "%";
+            elem.innerHTML = width  + "%";
+                                                
+    })
+
+
+}, 200);   
+</script>
+
+</body>
+</html>
+
